@@ -1,7 +1,7 @@
 {
-  "name": "gas-field-local-rag",
-  "version": "2.0.0",
-  "description": "Offline RAG-powered customer services and technical support agent for gas field inspection and maintenance engineers using Foundry Local",
+  "name": "bartudonmez-localrag",
+  "version": "1.0.0",
+  "description": "Offline Local RAG study assistant using Microsoft Foundry Local, Express, SQLite, and TF-IDF retrieval",
   "type": "module",
   "scripts": {
     "ingest": "node src/ingest.js",
@@ -15,19 +15,14 @@
     "foundry-local-sdk": "^0.9.0"
   },
   "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/leestott/local-rag.git"
-  },
   "keywords": [
     "rag",
     "offline-ai",
     "foundry-local",
     "phi-3",
-    "gas-field",
-    "support-agent",
     "sqlite",
-    "tfidf"
+    "tfidf",
+    "summer-school"
   ],
   "engines": {
     "node": ">=20.0.0"

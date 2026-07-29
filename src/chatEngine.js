@@ -40,7 +40,7 @@ export class ChatEngine {
     this._emitStatus("init", "Initializing Foundry Local SDK...");
 
     // Create the manager (requires appName)
-    const manager = FoundryLocalManager.create({ appName: "gas-field-local-rag" });
+    const manager = FoundryLocalManager.create({ appName: "bartudonmez-localrag" });
     const catalog = manager.catalog;
 
     this._emitStatus("catalog", "Discovering available models...");

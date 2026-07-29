@@ -12,7 +12,7 @@ import { parseFrontMatter, chunkText } from "./chunker.js";
 import { VectorStore } from "./vectorStore.js";
 
 async function ingest() {
-  console.log("=== Gas Field RAG – Document Ingestion ===\n");
+  console.log("=== Local RAG – Document Ingestion ===\n");
 
   const docsDir = config.docsDir;
   if (!fs.existsSync(docsDir)) {

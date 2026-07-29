@@ -679,14 +679,14 @@
   </header>
 
   <div id="quick-actions">
-    <button class="quick-btn" data-q="What is RAG?">What is RAG?</button>
-    <button class="quick-btn" data-q="What is Microsoft Foundry Local?">Foundry Local</button>
-    <button class="quick-btn" data-q="How do I run this application?">How to run</button>
-    <button class="quick-btn" data-q="Why use SQLite for local RAG?">SQLite store</button>
-    <button class="quick-btn" data-q="Explain TF-IDF retrieval">TF-IDF retrieval</button>
-    <button class="quick-btn" data-q="What should I deliver for the summer school project?">Delivery checklist</button>
-    <button class="quick-btn" data-q="How should I chunk documents?">Chunking tips</button>
-    <button class="quick-btn" data-q="Prompt engineering rules for local Q&A">Prompt rules</button>
+    <button class="quick-btn" data-q="What are the Local AI Lab opening hours in room B-214?">Lab hours B-214</button>
+    <button class="quick-btn" data-q="How do I fix EADDRINUSE on port 3000?">Port 3000 busy</button>
+    <button class="quick-btn" data-q="How many points is the offline Q&A criterion worth in the rubric?">Rubric points</button>
+    <button class="quick-btn" data-q="What should I do if Send is disabled while the model is loading?">Send disabled</button>
+    <button class="quick-btn" data-q="When do demo booking slots open each week?">Demo booking</button>
+    <button class="quick-btn" data-q="What is the late submission policy after the deadline?">Late policy</button>
+    <button class="quick-btn" data-q="TF-IDF or embeddings — what does this lab require to pass?">TF-IDF vs embeddings</button>
+    <button class="quick-btn" data-q="What belongs in the final delivery packet checklist?">Delivery packet</button>
   </div>
 
   <main class="stage">
@@ -707,7 +707,7 @@
     </button>
     <textarea
       id="user-input"
-      placeholder="Ask about RAG, Foundry Local, setup, or delivery…"
+      placeholder="Ask a specific lab question (hours, rubric, errors, booking)…"
       rows="1"
       autofocus
     ></textarea>
@@ -938,14 +938,14 @@
             welcomeMsgReady.classList.add('welcome-card');
             welcomeMsgReady.innerHTML =
               `<h2>LocalRAG is ready</h2>` +
-              `<p>Answers come from your local knowledge base via Foundry Local — no cloud calls after model download.</p>` +
+              `<p>Ask concrete lab questions — room hours, rubric scores, error fixes, booking rules. Answers are grounded in the handbook under <strong>docs/</strong>.</p>` +
               `<ul>` +
-              `<li>RAG concepts and architecture</li>` +
-              `<li>Foundry Local &amp; offline inference</li>` +
-              `<li>TF-IDF retrieval &amp; SQLite storage</li>` +
-              `<li>Chunking, prompts, delivery checklist</li>` +
+              `<li>Lab operations (B-214 hours, booking)</li>` +
+              `<li>Setup &amp; runtime error catalog</li>` +
+              `<li>Submission rubric &amp; delivery packet</li>` +
+              `<li>Chunking, TF-IDF vs embeddings, privacy</li>` +
               `</ul>` +
-              `<span class="welcome-note">Starter documents were prepared in the project <strong>docs/</strong> folder and indexed with <strong>npm run ingest</strong>. You can add your own files with the upload button.</span>`;
+              `<span class="welcome-note">Try a specific fact (e.g. room <strong>B-214</strong> or <strong>23:59</strong> deadline), then ask something outside the docs to see a refusal. Upload more <strong>.md</strong> files anytime.</span>`;
             delete welcomeMsgReady.dataset.replaced;
             welcomeLocked = true;
           }

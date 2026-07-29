@@ -7,7 +7,7 @@
 </p>
 
 <p align="center">
-  <strong>An offline document Q&amp;A assistant</strong> that runs entirely on your machine.<br/>
+  <strong>An offline document Q&amp;A assistant</strong> for a campus Local AI lab handbook.<br/>
   Built with <a href="https://learn.microsoft.com/azure/ai-foundry/foundry-local/">Microsoft Foundry Local</a>, Express, SQLite, and TF-IDF retrieval.
 </p>
 
@@ -40,7 +40,7 @@ No cloud API keys. No outbound calls after the first model download. Your docume
 | **Local vector store** | SQLite + TF-IDF — zero extra infrastructure |
 | **Modern study UI** | Soft paper theme, streaming chat, source panel |
 | **Runtime uploads** | Drop `.md` / `.txt` files into the knowledge base |
-| **Student-ready docs** | Starter corpus on RAG, Foundry Local, delivery tips |
+| **Student-ready docs** | 12 handbook files: lab hours, rubric, errors, booking, delivery |
 
 ---
 
@@ -96,15 +96,16 @@ Open **[http://127.0.0.1:3000](http://127.0.0.1:3000)**
 
 ## Example questions
 
-Try the quick-action chips, or ask:
+Ask for **specific facts** (this is where RAG shines):
 
-- What is RAG?
-- What is Microsoft Foundry Local?
-- How do I run this application?
-- Why use SQLite for local RAG?
-- What should I deliver for the summer school project?
+- What are the Local AI Lab opening hours in room B-214?
+- How many points is the offline Q&A criterion worth in the rubric?
+- What is the late submission policy after the deadline?
+- How do I fix EADDRINUSE on port 3000?
+- When do demo booking slots open each week?
+- TF-IDF or embeddings — what does this lab require to pass?
 
-Also try something **outside** the docs (e.g. sports trivia). The assistant should refuse politely when context is missing.
+Also try something **outside** the handbook (e.g. celebrity trivia). The assistant should refuse when context is missing.
 
 ---
 

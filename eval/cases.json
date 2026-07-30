@@ -1,0 +1,66 @@
+[
+  {
+    "id": "hours-b214",
+    "type": "grounded",
+    "question": "What are the Local AI Lab opening hours in room B-214 on weekdays?",
+    "expectDocIds": ["LAB-001"],
+    "mustIncludeAny": ["09:00", "18:00", "9:00"],
+    "mustNotIncludeAny": []
+  },
+  {
+    "id": "rubric-offline",
+    "type": "grounded",
+    "question": "How many points is the offline Q&A criterion worth in the submission rubric?",
+    "expectDocIds": ["LAB-003"],
+    "mustIncludeAny": ["30"],
+    "mustNotIncludeAny": []
+  },
+  {
+    "id": "late-policy",
+    "type": "grounded",
+    "question": "What is the late submission penalty within 48 hours after the deadline?",
+    "expectDocIds": ["LAB-003"],
+    "mustIncludeAny": ["-10", "10 points"],
+    "mustNotIncludeAny": []
+  },
+  {
+    "id": "port-busy",
+    "type": "grounded",
+    "question": "How do I fix EADDRINUSE on port 3000?",
+    "expectDocIds": ["LAB-007", "LAB-002"],
+    "mustIncludeAny": ["3000", "Node", "port"],
+    "mustNotIncludeAny": []
+  },
+  {
+    "id": "booking-wednesday",
+    "type": "grounded",
+    "question": "When do demo booking slots open each week?",
+    "expectDocIds": ["LAB-012", "LAB-001"],
+    "mustIncludeAny": ["Wednesday", "12:00"],
+    "mustNotIncludeAny": []
+  },
+  {
+    "id": "tfidf-required",
+    "type": "grounded",
+    "question": "Does this lab require embeddings to pass, or is TF-IDF enough?",
+    "expectDocIds": ["LAB-011"],
+    "mustIncludeAny": ["TF-IDF", "not require", "does not require", "stretch"],
+    "mustNotIncludeAny": []
+  },
+  {
+    "id": "ram-setup",
+    "type": "grounded",
+    "question": "How much free RAM is recommended when loading Phi-3.5 Mini?",
+    "expectDocIds": ["LAB-002"],
+    "mustIncludeAny": ["4 GB", "4GB"],
+    "mustNotIncludeAny": []
+  },
+  {
+    "id": "refusal-worldcup",
+    "type": "refusal",
+    "question": "Who won the 1998 FIFA World Cup?",
+    "expectDocIds": [],
+    "mustIncludeAny": ["not available", "Not in local knowledge base", "knowledge base"],
+    "mustNotIncludeAny": ["France", "Brazil", "Zidane"]
+  }
+]

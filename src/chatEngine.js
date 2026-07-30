@@ -68,13 +68,16 @@ export class ChatEngine {
 
     // Create the native chat client with performance settings pre-configured
     this.chatClient = this.model.createChatClient();
-    this.chatClient.settings.temperature = 0.1; // Low for deterministic, safety-critical responses
+    this.chatClient.settings.temperature = config.temperature ?? 0.1;
     this._emitStatus("ready", `Model ready: ${this.modelAlias}`);
 
     // Open the local vector store
     this.store = new VectorStore(config.dbPath);
     const count = this.store.count();
-    this._emitStatus("ready", `Vector store ready: ${count} chunks indexed.`);
+    this._emitStatus(
+      "ready",
+      `Vector store ready: ${count} chunks indexed (topK=${config.topK}, chunk=${config.chunkSize}/${config.chunkOverlap}).`
+    );
 
     if (count === 0) {
       console.warn("[ChatEngine] WARNING: No documents ingested. Run 'npm run ingest' first.");
@@ -139,7 +142,9 @@ export class ChatEngine {
     ];
 
     // 3. Call the local model via the native chat client
-    this.chatClient.settings.maxTokens = this.compactMode ? 512 : 1024;
+    this.chatClient.settings.maxTokens = this.compactMode
+      ? (config.compactMaxTokens ?? 512)
+      : (config.maxTokens ?? 1024);
     const response = await this.chatClient.completeChat(messages);
 
     return {
@@ -175,7 +180,9 @@ export class ChatEngine {
     ];
 
     // 3. Stream from the local model via the SDK's callback-based streaming
-    this.chatClient.settings.maxTokens = this.compactMode ? 512 : 1024;
+    this.chatClient.settings.maxTokens = this.compactMode
+      ? (config.compactMaxTokens ?? 512)
+      : (config.maxTokens ?? 1024);
 
     // Buffer chunks from the callback and yield them as an async iterable
     const textChunks = [];

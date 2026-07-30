@@ -1,0 +1,144 @@
+{
+  "updatedAt": "2026-07-30T00:30:02.980Z",
+  "mode": "quick",
+  "phaseA": [
+    {
+      "chunkSize": 200,
+      "chunkOverlap": 25,
+      "topK": 5,
+      "retrievalScore": 1,
+      "hits": 4,
+      "total": 4
+    },
+    {
+      "chunkSize": 200,
+      "chunkOverlap": 40,
+      "topK": 5,
+      "retrievalScore": 1,
+      "hits": 4,
+      "total": 4
+    },
+    {
+      "chunkSize": 280,
+      "chunkOverlap": 25,
+      "topK": 5,
+      "retrievalScore": 1,
+      "hits": 4,
+      "total": 4
+    },
+    {
+      "chunkSize": 280,
+      "chunkOverlap": 40,
+      "topK": 5,
+      "retrievalScore": 1,
+      "hits": 4,
+      "total": 4
+    },
+    {
+      "chunkSize": 200,
+      "chunkOverlap": 25,
+      "topK": 3,
+      "retrievalScore": 1,
+      "hits": 4,
+      "total": 4
+    },
+    {
+      "chunkSize": 200,
+      "chunkOverlap": 40,
+      "topK": 3,
+      "retrievalScore": 1,
+      "hits": 4,
+      "total": 4
+    },
+    {
+      "chunkSize": 280,
+      "chunkOverlap": 25,
+      "topK": 3,
+      "retrievalScore": 1,
+      "hits": 4,
+      "total": 4
+    },
+    {
+      "chunkSize": 280,
+      "chunkOverlap": 40,
+      "topK": 3,
+      "retrievalScore": 1,
+      "hits": 4,
+      "total": 4
+    }
+  ],
+  "leaderboard": [
+    {
+      "model": "phi-3.5-mini",
+      "temperature": 0.1,
+      "chunkSize": 200,
+      "chunkOverlap": 25,
+      "topK": 5,
+      "retrievalScore": 1,
+      "generationScore": 0.75,
+      "totalScore": 0.8625,
+      "perCase": [
+        {
+          "id": "hours-b214",
+          "retrievalHit": true,
+          "generationScore": 1,
+          "answerPreview": " - **Summary**: The Local AI Lab in room B-214 operates from 09:00 to 18:00 on weekdays.\n\n- **Details**:\n  - Monday to Friday:\n    - Opening: 09:00\n    - Closing: 18:00\n    - Staff"
+        },
+        {
+          "id": "rubric-offline",
+          "retrievalHit": true,
+          "generationScore": 1,
+          "answerPreview": " The offline Q&A criterion is worth 30 points in the submission rubric."
+        },
+        {
+          "id": "late-policy",
+          "retrievalHit": true,
+          "generationScore": 0,
+          "answerPreview": " - Submission is marked incomplete until rescheduled.\n  - Reference: Document 1: RAG Project Submission Rubric [Assessment]\n\n(Note: The exact penalty in points is not specified bey"
+        },
+        {
+          "id": "port-busy",
+          "retrievalHit": true,
+          "generationScore": 1,
+          "answerPreview": " To fix the `EADDRINUSE` error on port 3000, follow these steps:\n\n1. Identify the process that is already using port 3000. You can do this by running the following command in your "
+        }
+      ]
+    },
+    {
+      "model": "phi-3.5-mini",
+      "temperature": 0.1,
+      "chunkSize": 200,
+      "chunkOverlap": 40,
+      "topK": 5,
+      "retrievalScore": 1,
+      "generationScore": 0.75,
+      "totalScore": 0.8625,
+      "perCase": [
+        {
+          "id": "hours-b214",
+          "retrievalHit": true,
+          "generationScore": 1,
+          "answerPreview": " - **Summary**: The Local AI Lab in room B-214 operates from 09:00 to 18:00 on weekdays.\n\n- **Details**:\n  - Monday to Friday:\n    - Open: 09:00\n    - Close: 18:00\n    - Staffed me"
+        },
+        {
+          "id": "rubric-offline",
+          "retrievalHit": true,
+          "generationScore": 1,
+          "answerPreview": " The offline Q&A criterion is worth 30 points in the submission rubric."
+        },
+        {
+          "id": "late-policy",
+          "retrievalHit": true,
+          "generationScore": 0,
+          "answerPreview": " - Submission marked incomplete until rescheduled if more than 48 hours late without email approval.\n  - Reference: Document 2: Mentoring Office Hours FAQ [Mentoring]\n\n*Note: Speci"
+        },
+        {
+          "id": "port-busy",
+          "retrievalHit": true,
+          "generationScore": 1,
+          "answerPreview": " To fix the `EADDRINUSE :::3000` error, which indicates that port 3000 is already bound, follow these steps:\n\n1. Identify the process that is currently using port 3000. You can do "
+        }
+      ]
+    }
+  ]
+}

@@ -144,10 +144,33 @@ For larger or highly paraphrased collections, you can later swap in a local embe
 
 | Command | Description |
 |---------|-------------|
-| `npm run ingest` | Chunk docs → TF-IDF → SQLite |
+| `npm run ingest` | Chunk docs → TF-IDF → SQLite (uses best chunk settings if trained) |
 | `npm start` | Start UI + load Foundry Local model |
+| `npm run train` | Full RAG trainer: sweep chunk/topK + candidate models/temperatures |
+| `npm run train:quick` | Faster trainer (smaller grid, fewer cases) |
 | `npm test` | Run built-in Node test suite |
 | `npm run dev` | Start with `--watch` |
+
+### Built-in trainer (find the best local configuration)
+
+This project does **not** fine-tune neural weights (that is out of scope for Foundry Local summer demos). Instead it runs an **offline evaluation trainer** that:
+
+1. **Phase A** – sweeps `chunkSize`, `chunkOverlap`, `topK` and scores **retrieval hit-rate** on gold questions in `eval/cases.json`
+2. **Phase B** – tries available Foundry **model candidates** + **temperatures**, scores grounded answers and refusals
+3. Writes the winner to `config/best-config.json` and rebuilds `data/rag.db`
+4. On next `npm start`, `src/config.js` loads those winning parameters automatically
+
+```bash
+npm run train:quick   # smoke run
+npm run train         # fuller search (slower; needs RAM + model(s))
+```
+
+Optional model list:
+
+```bash
+npm run train -- --models=phi-3.5-mini,phi-4-mini
+```
+
 
 ---
 

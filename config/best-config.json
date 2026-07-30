@@ -1,0 +1,25 @@
+{
+  "updatedAt": "2026-07-30T00:30:02.980Z",
+  "best": {
+    "score": 0.8625,
+    "config": {
+      "model": "phi-3.5-mini",
+      "temperature": 0.1,
+      "chunkSize": 200,
+      "chunkOverlap": 25,
+      "topK": 5,
+      "maxTokens": 1024,
+      "compactMaxTokens": 512
+    }
+  },
+  "runnerUp": [
+    {
+      "score": 0.8625,
+      "model": "phi-3.5-mini",
+      "temperature": 0.1,
+      "chunkSize": 200,
+      "chunkOverlap": 40,
+      "topK": 5
+    }
+  ]
+}

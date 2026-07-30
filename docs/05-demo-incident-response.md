@@ -40,8 +40,8 @@ Use this decision path if your demo fails five minutes before presentation.
 ## Step 5 — Prompting
 
 - Ensure system prompt forbids answering outside context.
-- Demo a deliberate unknown question (“Who won the 1998 World Cup?”) and expect refusal.
-- If refusal fails, tighten `src/prompts.js` and restart the server.
+- Demo a deliberate unknown question (“Who is the current emperor of Atlantis?”) and expect refusal.
+- If refusal fails, tighten `src/prompts.js` and restart the server. Do not put the unknown question text inside handbook docs, or retrieval may latch onto that example.
 
 ## Step 6 — Resources
 

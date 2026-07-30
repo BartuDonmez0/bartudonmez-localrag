@@ -21,6 +21,8 @@ const defaults = {
   chunkSize: 200,
   chunkOverlap: 25,
   topK: 3,
+  // Drop weak TF-IDF matches so the model is not fed unrelated lab docs
+  minRetrievalScore: 0.12,
 
   // Server
   port: 3000,
@@ -48,6 +50,7 @@ function loadBestOverlay() {
       "chunkSize",
       "chunkOverlap",
       "topK",
+      "minRetrievalScore",
     ];
     const picked = {};
     for (const key of allowed) {

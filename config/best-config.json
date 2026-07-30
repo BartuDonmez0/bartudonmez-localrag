@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-30T00:30:02.980Z",
+  "updatedAt": "2026-07-30T02:30:31.673Z",
   "best": {
     "score": 0.8625,
     "config": {
@@ -7,8 +7,9 @@
       "temperature": 0.1,
       "chunkSize": 200,
       "chunkOverlap": 25,
-      "topK": 5,
-      "maxTokens": 1024,
+        "topK": 5,
+        "minRetrievalScore": 0.12,
+        "maxTokens": 1024,
       "compactMaxTokens": 512
     }
   },

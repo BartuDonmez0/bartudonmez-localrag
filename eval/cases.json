@@ -56,11 +56,11 @@
     "mustNotIncludeAny": []
   },
   {
-    "id": "refusal-worldcup",
+    "id": "refusal-atlantis",
     "type": "refusal",
-    "question": "Who won the 1998 FIFA World Cup?",
+    "question": "Who is the current emperor of Atlantis?",
     "expectDocIds": [],
     "mustIncludeAny": ["not available", "Not in local knowledge base", "knowledge base"],
-    "mustNotIncludeAny": ["France", "Brazil", "Zidane"]
+    "mustNotIncludeAny": ["Poseidon", "Atlantis rules", "reign"]
   }
 ]

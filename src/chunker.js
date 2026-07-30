@@ -45,12 +45,22 @@ export function chunkText(text, maxTokens = 400, overlapTokens = 50) {
  * Returns a Map<term, frequency>.
  */
 export function termFrequency(text) {
+  const STOP = new Set([
+    "a", "an", "the", "and", "or", "but", "if", "in", "on", "at", "to", "for",
+    "of", "as", "is", "are", "was", "were", "be", "been", "being", "have", "has",
+    "had", "do", "does", "did", "will", "would", "could", "should", "may", "might",
+    "can", "this", "that", "these", "those", "with", "from", "by", "about", "into",
+    "over", "after", "before", "between", "out", "up", "down", "not", "no", "yes",
+    "it", "its", "you", "your", "we", "our", "they", "their", "he", "she", "his",
+    "her", "who", "what", "when", "where", "why", "how", "which", "whom",
+  ]);
+
   const tf = new Map();
   const tokens = text
     .toLowerCase()
     .replace(/[^a-z0-9₂\-']/g, " ")
     .split(/\s+/)
-    .filter((t) => t.length > 1);
+    .filter((t) => t.length > 2 && !STOP.has(t));
   for (const t of tokens) {
     tf.set(t, (tf.get(t) || 0) + 1);
   }

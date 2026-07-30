@@ -8,7 +8,7 @@
 import { FoundryLocalManager } from "foundry-local-sdk";
 import { VectorStore } from "./vectorStore.js";
 import { config } from "./config.js";
-import { SYSTEM_PROMPT, SYSTEM_PROMPT_COMPACT } from "./prompts.js";
+import { SYSTEM_PROMPT, SYSTEM_PROMPT_COMPACT, REFUSAL_TEXT } from "./prompts.js";
 
 export class ChatEngine {
   constructor() {
@@ -99,10 +99,22 @@ export class ChatEngine {
 
   /**
    * Retrieve relevant context from the local knowledge base.
+   * Filters out weak TF-IDF matches below minRetrievalScore.
    */
   retrieve(query) {
     const topK = this.compactMode ? Math.min(config.topK, 3) : config.topK;
-    return this.store.search(query, topK);
+    const minScore = config.minRetrievalScore ?? 0.12;
+    const chunks = this.store.search(query, topK);
+    return chunks.filter((c) => (c.score ?? 0) >= minScore);
+  }
+
+  _mapSources(chunks) {
+    return chunks.map((c) => ({
+      title: c.title,
+      category: c.category,
+      docId: c.doc_id,
+      score: Math.round(c.score * 100) / 100,
+    }));
   }
 
   /**
@@ -110,13 +122,17 @@ export class ChatEngine {
    */
   _buildContext(chunks) {
     if (chunks.length === 0) {
-      return "No relevant documents found in local knowledge base.";
+      return (
+        "NO RELEVANT DOCUMENTS FOUND.\n" +
+        "The knowledge base has nothing useful for this question.\n" +
+        "You MUST refuse. Do not use outside knowledge."
+      );
     }
 
     return chunks
       .map(
         (c, i) =>
-          `--- Document ${i + 1}: ${c.title} [${c.category}] ---\n${c.content}`
+          `--- Document ${i + 1}: ${c.title} [${c.category}] (score=${(c.score ?? 0).toFixed(2)}) ---\n${c.content}`
       )
       .join("\n\n");
   }
@@ -125,11 +141,14 @@ export class ChatEngine {
    * Generate a response for a user query (non-streaming).
    */
   async query(userMessage, history = []) {
-    // 1. Retrieve relevant chunks
     const chunks = this.retrieve(userMessage);
-    const context = this._buildContext(chunks);
 
-    // 2. Build messages array
+    // Hard refuse when retrieval is empty — prevents parametric hallucinations
+    if (chunks.length === 0) {
+      return { text: REFUSAL_TEXT, sources: [] };
+    }
+
+    const context = this._buildContext(chunks);
     const systemPrompt = this.compactMode ? SYSTEM_PROMPT_COMPACT : SYSTEM_PROMPT;
     const messages = [
       { role: "system", content: systemPrompt },
@@ -141,7 +160,6 @@ export class ChatEngine {
       { role: "user", content: userMessage },
     ];
 
-    // 3. Call the local model via the native chat client
     this.chatClient.settings.maxTokens = this.compactMode
       ? (config.compactMaxTokens ?? 512)
       : (config.maxTokens ?? 1024);
@@ -149,12 +167,7 @@ export class ChatEngine {
 
     return {
       text: response.choices[0].message.content,
-      sources: chunks.map((c) => ({
-        title: c.title,
-        category: c.category,
-        docId: c.doc_id,
-        score: Math.round(c.score * 100) / 100,
-      })),
+      sources: this._mapSources(chunks),
     };
   }
 
@@ -163,11 +176,15 @@ export class ChatEngine {
    * Returns an async iterable of text chunks.
    */
   async *queryStream(userMessage, history = []) {
-    // 1. Retrieve relevant chunks
     const chunks = this.retrieve(userMessage);
-    const context = this._buildContext(chunks);
 
-    // 2. Build messages array
+    if (chunks.length === 0) {
+      yield { type: "sources", data: [] };
+      yield { type: "text", data: REFUSAL_TEXT };
+      return;
+    }
+
+    const context = this._buildContext(chunks);
     const systemPrompt = this.compactMode ? SYSTEM_PROMPT_COMPACT : SYSTEM_PROMPT;
     const messages = [
       { role: "system", content: systemPrompt },
@@ -179,7 +196,6 @@ export class ChatEngine {
       { role: "user", content: userMessage },
     ];
 
-    // 3. Stream from the local model via the SDK's callback-based streaming
     this.chatClient.settings.maxTokens = this.compactMode
       ? (config.compactMaxTokens ?? 512)
       : (config.maxTokens ?? 1024);
@@ -197,18 +213,11 @@ export class ChatEngine {
       if (resolve) { resolve(); resolve = null; }
     });
 
-    // Yield sources metadata first
     yield {
       type: "sources",
-      data: chunks.map((c) => ({
-        title: c.title,
-        category: c.category,
-        docId: c.doc_id,
-        score: Math.round(c.score * 100) / 100,
-      })),
+      data: this._mapSources(chunks),
     };
 
-    // Yield text chunks from the SDK streaming callback buffer
     while (!done || textChunks.length > 0) {
       if (textChunks.length === 0 && !done) {
         await new Promise((r) => { resolve = r; });
@@ -222,7 +231,6 @@ export class ChatEngine {
       }
     }
 
-    // Ensure the stream promise resolves cleanly
     await streamPromise;
   }
 

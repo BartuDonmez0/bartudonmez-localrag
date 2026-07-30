@@ -105,7 +105,7 @@ Ask for **specific facts** (this is where RAG shines):
 - When do demo booking slots open each week?
 - TF-IDF or embeddings — what does this lab require to pass?
 
-Also try something **outside** the handbook (e.g. celebrity trivia). The assistant should refuse when context is missing.
+Also try something **outside** the handbook (e.g. “Who is the current emperor of Atlantis?”). The assistant should refuse when context is missing — this matches the summer-school **responsible refusal** criterion.
 
 ---
 

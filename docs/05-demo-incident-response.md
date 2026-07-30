@@ -40,8 +40,9 @@ Use this decision path if your demo fails five minutes before presentation.
 ## Step 5 — Prompting
 
 - Ensure system prompt forbids answering outside context.
-- Demo a deliberate unknown question (“Who is the current emperor of Atlantis?”) and expect refusal.
-- If refusal fails, tighten `src/prompts.js` and restart the server. Do not put the unknown question text inside handbook docs, or retrieval may latch onto that example.
+- Demo a deliberate unknown question that cannot appear in your docs (for example a fictional place or person), and expect refusal.
+- If refusal fails, tighten `src/prompts.js` and raise `minRetrievalScore` slightly, then restart the server.
+- Important: do **not** paste the exact unknown demo question into handbook Markdown, or TF-IDF may retrieve that paragraph.
 
 ## Step 6 — Resources
 
